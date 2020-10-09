@@ -1,5 +1,13 @@
 ## InMobi Android Mediation Adapter Changelog
 
+#### Version 9.1.0.1
+- Bug fixes for native click tracking
+- Verified compatibility with Android 11
+
+Built and test with:
+- Google Mobile Ads SDK version 19.4.0.
+- InMobi SDK version 9.1.0.
+
 #### Version 9.1.0.0
 - Verified compatibility with InMobi SDK version 9.1.0.
 - Updated the minimum required Google Mobile Ads SDK version to 19.4.0.
