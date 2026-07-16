@@ -1,5 +1,8 @@
 ## InMobi Android Mediation Adapter Changelog
 
+#### Version 11.0.0.1
+- Override `UnifiedNativeAdMapper.destroy()` to call `InMobiNative.destroy()` when GMA invokes full native ad teardown. `untrackView()` still only calls `unTrackViews()` so feed refresh/swap can re-track.
+
 #### Version 11.0.0.0
 - Verified compatibility with InMobi Kotlin SDK version 11.0.0.
 - RewardedInterstitial support added.
