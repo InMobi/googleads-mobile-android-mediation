@@ -24,6 +24,7 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
+import org.robolectric.shadows.ShadowLog
 
 @RunWith(AndroidJUnit4::class)
 class InMobiAdapterUtilsTest {
@@ -378,6 +379,22 @@ class InMobiAdapterUtilsTest {
       .containsExactly(AdSize(320, 50), AdSize(300, 250), AdSize(728, 90))
       .inOrder()
     assertThat(closestSize).isEqualTo(expectedClosestSize)
+  }
+
+  @Test
+  fun findClosestBannerSize_nullMediationUtils_returnsRequestedSize() {
+    val context = ApplicationProvider.getApplicationContext<Context>()
+    val adSize = AdSize(320, 50)
+    ShadowLog.clear()
+
+    val closestSize = InMobiAdapterUtils.findClosestBannerSize(context, adSize, null)
+
+    assertThat(closestSize).isEqualTo(adSize)
+    val logs = ShadowLog.getLogsForTag("InMobiMediationAdapter")
+    assertThat(logs).isNotEmpty()
+    assertThat(logs.last().msg).contains("MediationUtilsWrapper is null")
+    assertThat(logs.last().msg).contains("fallback banner size")
+    assertThat(logs.last().msg).contains(adSize.toString())
   }
 
   @Test

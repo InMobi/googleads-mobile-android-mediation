@@ -279,7 +279,17 @@ public class InMobiAdapterUtils {
 
   @Nullable
   public static AdSize findClosestBannerSize(
-      @NonNull Context context, @NonNull AdSize adSize, MediationUtilsWrapper mediationUtils) {
+      @NonNull Context context,
+      @NonNull AdSize adSize,
+      @Nullable MediationUtilsWrapper mediationUtils) {
+    // A null wrapper crashes the banner load before the RTB fallback can run. Use the requested
+    // size, which is the same size that path already treats as the fallback.
+    if (mediationUtils == null) {
+      Log.w(
+          InMobiMediationAdapter.TAG,
+          "MediationUtilsWrapper is null. Using the fallback banner size: " + adSize);
+      return adSize;
+    }
     ArrayList<AdSize> potentials = new ArrayList<>();
     potentials.add(new AdSize(320, 50));
     potentials.add(new AdSize(300, 250));

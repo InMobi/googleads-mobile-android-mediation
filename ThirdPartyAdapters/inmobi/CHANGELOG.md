@@ -3,6 +3,7 @@
 #### Version 11.5.0.1
 - Override `UnifiedNativeAdMapper.destroy()` to call `InMobiNative.destroy()`.
 - Added support for application mute through `InMobiSdk.setApplicationMuted()`.
+- Avoid a banner crash when `MediationUtilsWrapper` is null by logging and using the requested banner size.
 
 Built and tested with:
 - Google Mobile Ads SDK version 25.5.0.
